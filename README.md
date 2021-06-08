@@ -14,7 +14,7 @@ Pretty straightforward
 
 1. Install only on SH or SHC (via SHD) and restart
 
-2. Configure proxy settings (if needed)
+2. If needed configure proxy settings
 
 ## Configuring the alert action
 
@@ -40,6 +40,15 @@ For security reasons the Azure storage account in use should not hold any PII or
 ## Troubleshooting
 
 Search `index=_internal source=*splunkd.log upload_to_azure_blob` to view results of script.
+
+Search below gives insights about each run report.
+
+```
+index=cim_modactions sourcetype="modular_alerts:upload_to_azure_blob" 
+|  transaction pid mvlist=signature
+|  table _time, user, search_name, action_status, action_name, signature
+```
+
 
 ## Support
 
