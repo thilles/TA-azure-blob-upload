@@ -31,13 +31,12 @@ Note that the `Azure account key` is not hashed in the Splunk backend. For secur
 -----|------
 | Blob file name | If you want to overwrite the report name |
 | Azure account name | Your Azure storage account |
-| Azure account key | See [Azure docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) on how to obtain | 
+| Azure account key | See [Azure docs](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) on how to obtain |
 | Azure container | Where you would like to store the blob |
-
 
 ![Upload configuration](static/config_blob_upload.png)
 
-## Troubleshooting 
+## Troubleshooting
 
 Search `index=_internal source=*splunkd.log upload_to_azure_blob` to view results of script.
 
@@ -46,4 +45,4 @@ Search `index=_internal source=*splunkd.log upload_to_azure_blob` to view result
 This add-on is provided without support, but is supported on a best-effort basis by the community.
 Contributions and pull requests are more than welcome.
 
-Official Git repository: https://github.com/thilles/TA-azure-blob-upload
+Official Git repository: <https://github.com/thilles/TA-azure-blob-upload>
