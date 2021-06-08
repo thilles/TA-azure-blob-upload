@@ -7,11 +7,12 @@ def upload_to_azure_blob(azure_account_name, azure_account_key, azure_container,
     from azure.storage.blob import ContentSettings
     from azure.storage.blob._shared.base_client import create_configuration
     import datetime
+    import gzip
 
     # Prefix the Blob file name with now time
     now_time = datetime.datetime.utcnow()
     date_string = now_time.strftime('%Y-%m-%dT%H%M%SZ_')
-    azure_blob_file_name = date_string + azure_blob_file_name + '.csv.gz'
+    azure_blob_file_name = date_string + azure_blob_file_name + '.csv'
     
     conn_string = f'DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName={azure_account_name};AccountKey={azure_account_key}'
     
@@ -35,7 +36,8 @@ def upload_to_azure_blob(azure_account_name, azure_account_key, azure_container,
 
     # Construct the BlobClient, including the customized configuation.
     blob = BlobClient.from_connection_string(conn_str=conn_string, container_name=azure_container, blob_name=azure_blob_file_name, _configuration=config)
-    blob.upload_blob(full_path_to_file, content_settings=ContentSettings(content_type='application/CSV.GZ'))
+    with gzip.open(full_path_to_file, "rb") as data:
+        blob.upload_blob(data.read(), content_settings=ContentSettings(content_type='application/CSV'))
 
     return
 
