@@ -1,4 +1,4 @@
-# README
+# Upload to Azure Blob add-on to Splunk
 
 This is an add-on powered by the Splunk Add-on Builder.
 
@@ -7,11 +7,6 @@ It is a custom alert action which let's you upload the results of a scheduled Sp
 This can be useful if you have some data in Splunk which you would like export and vizualize other places, e.g. PowerBI.
 
 Tested and verified with Python3 and Splunk 8.2.0.
-
-## Limitations
-
-The user owning the report needs to have a role with the `list_storage_passwords` capability (not in `user` role by default).
-Adding this will however have other security implications. A better solution is to have a dedicated service user which owns the reports.
 
 ## Installation and setup
 
@@ -25,8 +20,6 @@ Pretty straightforward
 
 Navigate to your report and enable its scheduling.
 
-Note that the `Azure account key` is not hashed in the Splunk backend. For security reasons the Azure storage account in use should not hold any PII or other sensitive information.
-
 | Element | What |
 -----|------
 | Blob file name | If you want to overwrite the report name |
@@ -35,6 +28,14 @@ Note that the `Azure account key` is not hashed in the Splunk backend. For secur
 | Azure container | Where you would like to store the blob |
 
 ![Upload configuration](static/config_blob_upload.png)
+
+## Limitations and considerations
+
+The user owning the report needs to have a role with the `list_storage_passwords` capability (not in `user` role by default).
+Adding this will however have other security implications. A better solution is to have a dedicated service user which owns the reports.
+
+The `Azure account key` is saved in cleartext in savedsearches.conf.
+For security reasons the Azure storage account in use should not hold any PII or other sensitive information.
 
 ## Troubleshooting
 

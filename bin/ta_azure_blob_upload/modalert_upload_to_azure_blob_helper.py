@@ -22,14 +22,11 @@ def upload_to_azure_blob(azure_account_name, azure_account_key, azure_container,
     if proxydict:
         proxy_host = str(proxydict['proxy_url'])
         proxy_port = str(proxydict['proxy_port'])
-
-        http_proxy = f'http://{proxy_host}:{proxy_port}'
-        https_proxy = f'https://{proxy_host}:{proxy_port}'
-
+        
         # Create a storage Configuration object and update the proxy policy.
         config.proxy_policy.proxies = {
-            'http': http_proxy,
-            'https': https_proxy
+            'http': f'http://{proxy_host}:{proxy_port}',
+            'https': f'https://{proxy_host}:{proxy_port}'
         }
     
     full_path_to_file = os.path.join('/opt/splunk/var/run/splunk/dispatch/', splunk_results_file_path)
