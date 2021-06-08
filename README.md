@@ -41,14 +41,13 @@ For security reasons the Azure storage account in use should not hold any PII or
 
 Search `index=_internal source=*splunkd.log upload_to_azure_blob` to view results of script.
 
-Search below gives insights about each run report.
+Search below gives insights about each run report - depends that index `cim_modactions` exists.
 
-```
+```splunk
 index=cim_modactions sourcetype="modular_alerts:upload_to_azure_blob" 
 |  transaction pid mvlist=signature
 |  table _time, user, search_name, action_status, action_name, signature
 ```
-
 
 ## Support
 
