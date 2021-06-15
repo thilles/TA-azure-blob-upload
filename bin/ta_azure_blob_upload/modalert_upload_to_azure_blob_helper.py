@@ -116,10 +116,13 @@ def process_event(helper, *args, **kwargs):
     # Get parameter values
 
     azure_blob_file_name = helper.get_param("azure_blob_file_name")
-    helper.log_info("azure_blob_file_name={}".format(azure_blob_file_name))
-    if not azure_blob_file_name.strip():
-        azure_blob_file_name = search_name
+    if azure_blob_file_name is None:
+        azure_blob_file_name = search_name.strip().replace(" ", "_")
         helper.log_info("No azure_blob_file_name name given, using search_name instead")
+    else:
+        azure_blob_file_name = azure_blob_file_name.strip().replace(" ", "_")
+    helper.log_info("azure_blob_file_name={}".format(azure_blob_file_name))
+
 
     azure_account_name = helper.get_param("azure_account_name")
     helper.log_info("azure_account_name={}".format(azure_account_name))
