@@ -37,6 +37,10 @@ Adding this will however have other security implications. A better solution is 
 The `Azure account key` is saved in cleartext in savedsearches.conf.
 For security reasons the Azure storage account in use should not hold any PII or other sensitive information.
 
+## Dependencies
+
+The alert action logging depends that the [Splunk Common Information Model (CIM)](https://splunkbase.splunk.com/app/1621/) app is installed (you should use this regardless), and that the index `cim_modactions` exists.
+
 ## Troubleshooting
 
 Search `index=_internal source=*splunkd.log upload_to_azure_blob` to view results of script.
