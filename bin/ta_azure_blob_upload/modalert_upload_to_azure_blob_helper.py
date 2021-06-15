@@ -116,7 +116,7 @@ def process_event(helper, *args, **kwargs):
     # Get parameter values
 
     azure_blob_file_name = helper.get_param("azure_blob_file_name")
-    if azure_blob_file_name is None:
+    if azure_blob_file_name is None or not azure_blob_file_name.strip():
         azure_blob_file_name = search_name.strip().replace(" ", "_")
         helper.log_info("No azure_blob_file_name name given, using search_name instead")
     else:
